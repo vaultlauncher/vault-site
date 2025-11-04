@@ -13,7 +13,7 @@ import { Folder, Paperclip } from "lucide-react";
 export default function Navbar() {
   return (
     <div className="px-6 mx-auto max-w-7xl">
-      <div className="bg-card backdrop-blur-sm p-4 rounded-xl flex flex-row items-center justify-between m-4 border shadow-sm w-full">
+      <div className="bg-card/80 backdrop-blur-sm p-4 rounded-xl flex flex-row items-center justify-between m-4 border shadow-sm w-full">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex gap-3">
             <Logo className="w-6 h-6 text-primary stroke-border" />

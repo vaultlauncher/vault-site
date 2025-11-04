@@ -2,11 +2,20 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Features from "@/components/features";
 import Link from "next/link";
+import { Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen px-4">
-      <h1 className="text-4xl md:text-6xl font-bold text-center mx-auto mt-8 md:mt-14">
+      <div className="flex justify-center mt-12">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm hover:bg-primary/15 transition-colors">
+          <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+          <span className="text-sm font-medium text-primary">
+            Open Source • Modern • Fast
+          </span>
+        </div>
+      </div>
+      <h1 className="text-4xl md:text-6xl font-bold text-center mx-auto mt-8 md:mt-8">
         The <span className="text-primary">Ultimate</span> Game Launcher for
         <br />
         <span className="text-chart-2">Steam Games</span>
@@ -42,7 +51,7 @@ export default function Home() {
             </Link>
           </Button>
         </div>
-        <p className="text-muted-foreground text-xs mt-2">
+        <p className="text-muted-foreground text-xs mt-2 font-semibold">
           Linux support planned
         </p>
       </div>
