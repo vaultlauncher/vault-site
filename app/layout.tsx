@@ -17,8 +17,49 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vault Launcher",
-  description: "The Ultimate Game Launcher.",
+  title: {
+    default: "Vault Launcher",
+    template: "%s | Vault Launcher",
+  },
+  description:
+    "The Ultimate Game Launcher. Discover, organize, and launch your games with speed and style.",
+  applicationName: "Vault Launcher",
+  authors: [{ name: "Parcoil", url: "https://vault.parcoil.com" }],
+  keywords: [
+    "vault",
+    "game launcher",
+    "game manager",
+    "game library",
+    "game launcher app",
+    "pc gaming",
+    "steam games",
+    "game downloader",
+    "open source",
+    "vault launcher",
+  ],
+  creator: "Parcoil",
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  alternates: {
+    canonical: "https://vault.parcoil.com",
+  },
 };
 
 export default function RootLayout({
