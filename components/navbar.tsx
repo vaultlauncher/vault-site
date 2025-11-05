@@ -23,8 +23,8 @@ export default function Navbar() {
           </Link>
         </div>
 
-         <NavigationMenu className="hidden md:flex">
-           <NavigationMenuList className="gap-1 justify-center px-8">
+        <NavigationMenu className="hidden md:flex flex-1 justify-center ml-7">
+          <NavigationMenuList className="gap-1 justify-center px-8">
             <NavigationMenuItem>
               <NavigationMenuLink asChild>
                 <Link

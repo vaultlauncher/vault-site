@@ -69,7 +69,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiased transition-colors`}>
+      <body
+        className={`antialiased transition-colors w-screen overflow-x-hidden`}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           {children}
