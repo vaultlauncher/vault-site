@@ -24,6 +24,12 @@ export default function Footer() {
             >
               Docs
             </Link>
+            <Link
+              href="/dmca"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              DMCA
+            </Link>
             <Button variant="ghost" size="sm" asChild>
               <Link href="/">
                 <svg viewBox="0 0 128 128" className="w-4 h-4">
