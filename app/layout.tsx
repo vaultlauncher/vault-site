@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -15,6 +12,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+
+
 
 export const metadata: Metadata = {
   title: {
@@ -38,11 +40,6 @@ export const metadata: Metadata = {
     "vault launcher",
   ],
   creator: "Parcoil",
-  colorScheme: "light dark",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
-  ],
   robots: {
     index: true,
     follow: true,
@@ -70,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased transition-colors w-screen overflow-x-hidden`}
+        className={`${poppins.variable} ${geistMono.variable} antialiased transition-colors w-screen overflow-x-hidden`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
