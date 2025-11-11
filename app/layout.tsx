@@ -16,8 +16,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-
-
 export const metadata: Metadata = {
   title: {
     default: "Vault Launcher",
@@ -69,6 +67,26 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${geistMono.variable} antialiased transition-colors w-screen overflow-x-hidden`}
       >
+        <head>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/site.webmanifest"></link>
+        </head>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           {children}
