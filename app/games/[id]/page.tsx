@@ -7,8 +7,6 @@ interface GameDetail {
   [key: string]: unknown;
 }
 
-
-
 async function getGameDetails(appid: string): Promise<GameDetail> {
   const apiUrl =
     process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
@@ -24,7 +22,8 @@ async function getGameDetails(appid: string): Promise<GameDetail> {
         `Failed to fetch game details: ${res.status} ${res.statusText}`
       );
     }
-    return res.json();
+    const data = await res.json();
+    return data[appid]?.data || data;
   } catch (error) {
     console.error("Fetch error:", error);
     throw new Error("Failed to fetch game details");
@@ -48,7 +47,6 @@ export async function generateMetadata({
     };
   }
 }
-
 
 export default async function GameDetailPage({
   params,
@@ -78,7 +76,7 @@ export default async function GameDetailPage({
   try {
     game = await getGameDetails(id);
     console.log(game);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     console.error("Error fetching game data:", error);
   }
@@ -103,13 +101,6 @@ export default async function GameDetailPage({
   return (
     <div className="min-h-screen px-4 py-12">
       <div className="mx-auto" style={{ maxWidth: "56rem" }}>
-        <Button variant="ghost" asChild className="mb-8">
-          <Link href="/games">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Games
-          </Link>
-        </Button>
-
         <GameDetailClient game={game} />
       </div>
     </div>

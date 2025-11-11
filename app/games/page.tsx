@@ -1,14 +1,6 @@
-
 import Search from "./search";
 import { GameCard } from "./game-card";
 import { Metadata } from "next/types";
-
-interface Game {
-  appid: number;
-  name: string;
-}
-
-
 
 interface DetailedGame {
   steam_appid?: number;
@@ -21,7 +13,7 @@ export const metadata: Metadata = {
   title: "Browse Games",
 };
 
-async function getHotGames(): Promise<Game[]> {
+async function getHotGames(): Promise<any[]> {
   const apiUrl =
     process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
   const res = await fetch(`${apiUrl}/games/hot`, {
@@ -32,17 +24,13 @@ async function getHotGames(): Promise<Game[]> {
   }
   const detailedGames: DetailedGame[] = await res.json();
   return detailedGames.map((game) => ({
+    ...game,
     appid: game.steam_appid || game.appid || 0,
-    name: game.name,
   }));
 }
 
-
-
 export default async function GamesPage() {
   const games = await getHotGames();
-
-
 
   return (
     <div className="min-h-screen px-4 py-12">

@@ -30,6 +30,12 @@ export default function Footer() {
             >
               DMCA
             </Link>
+            <Link
+              href="/privacy"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Privacy
+            </Link>
             <Button variant="ghost" size="sm" asChild>
               <Link href="/">
                 <svg viewBox="0 0 128 128" className="w-4 h-4">

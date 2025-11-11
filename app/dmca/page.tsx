@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DMCA - Vault Launcher",
+  title: "DMCA",
   description: "DMCA notice for Vault Launcher",
 };
 

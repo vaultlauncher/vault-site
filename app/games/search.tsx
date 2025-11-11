@@ -59,30 +59,24 @@ export default function Search() {
     <div className="mx-auto" style={{ maxWidth: "42rem" }}>
       <div className="relative">
         <ButtonGroup className="w-full">
-          <div className="relative flex-1">
-            <SearchIcon
-              className="absolute left-3 top-1/2 w-4 h-4 text-muted-foreground"
+          <Input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search for games..."
+            onKeyPress={(e) => e.key === "Enter" && handleSearch()}
+          />
+          {query && (
+            <button
+              onClick={clearSearch}
+              className="absolute right-3 top-1/2 text-muted-foreground hover:text-foreground transition-colors"
               style={{ transform: "translateY(-50%)" }}
-            />
-            <Input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search for games..."
-              className="flex-1 pl-10 pr-10 py-2 border border-input rounded-md bg-background"
-              onKeyPress={(e) => e.key === "Enter" && handleSearch()}
-            />
-            {query && (
-              <button
-                onClick={clearSearch}
-                className="absolute right-3 top-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                style={{ transform: "translateY(-50%)" }}
-                aria-label="Clear search"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+              aria-label="Clear search"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+
           <Button
             onClick={handleSearch}
             disabled={loading || query.length < 3}

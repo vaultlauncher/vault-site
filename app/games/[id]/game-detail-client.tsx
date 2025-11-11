@@ -3,8 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Download, Zap } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 interface GameDetail {
   steam_appid?: number;
@@ -25,10 +25,8 @@ interface GameDetail {
   [key: string]: unknown;
 }
 
-
-
 interface GameDetailClientProps {
-  game: GameDetail;
+  game: any;
 }
 
 export function GameDetailClient({ game }: GameDetailClientProps) {
@@ -46,7 +44,7 @@ export function GameDetailClient({ game }: GameDetailClientProps) {
             style={{ opacity: imageLoaded ? 1 : 0 }}
           >
             <Image
-              src={`https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${game.steam_appid}/header.jpg?t=1749053861`}
+              src={game.header_image}
               alt={game.name || "Game hero image"}
               width={600}
               height={300}
@@ -82,8 +80,8 @@ export function GameDetailClient({ game }: GameDetailClientProps) {
             transitionDelay: "600ms",
           }}
         >
-          <Card>
-            <CardHeader>
+          <Card className="gap-3">
+            <CardHeader className="gap-0">
               <CardTitle>Game Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -101,17 +99,14 @@ export function GameDetailClient({ game }: GameDetailClientProps) {
               </p>
               {game.price_overview && (
                 <p>
-                  <strong>Price:</strong> {game.price_overview.final_formatted}
+                  <strong>Steam Price:</strong>{" "}
+                  {game.price_overview.final_formatted}
                 </p>
               )}
             </CardContent>
           </Card>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="flex-1 font-semibold">
-              <Download className="w-4 h-4 mr-2" />
-              Download
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 mb-0 ">
             <Button
               variant="secondary"
               className="flex-1 font-semibold"
@@ -119,9 +114,17 @@ export function GameDetailClient({ game }: GameDetailClientProps) {
                 window.location.href = `vault://game/${game.steam_appid}`;
               }}
             >
-              <Zap className="w-4 h-4 mr-2" />
+              <img src="/vaultlogotrans.png" className="w-4 h-4" />
               Open in Vault
             </Button>
+          </div>
+          <div className="text-center">
+            <Link
+              href="/"
+              className="text-xs text-center underline text-primary"
+            >
+              Dont have vault launcher installed?
+            </Link>
           </div>
         </div>
       </div>
@@ -160,26 +163,30 @@ export function GameDetailClient({ game }: GameDetailClientProps) {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {game.screenshots.slice(0, 4).map((screenshot, index) => (
-                <div
-                  key={index}
-                  className="relative overflow-hidden rounded-lg transition-transform duration-300"
-                  style={{
-                    transform:
-                      hoveredScreenshot === index ? "scale(1.05)" : "scale(1)",
-                  }}
-                  onMouseEnter={() => setHoveredScreenshot(index)}
-                  onMouseLeave={() => setHoveredScreenshot(null)}
-                >
-                  <Image
-                    src={screenshot.path_thumbnail}
-                    alt={`Screenshot ${index + 1}`}
-                    width={300}
-                    height={169}
-                    className="rounded-lg w-full"
-                  />
-                </div>
-              ))}
+              {game.screenshots
+                .slice(0, 4)
+                .map((screenshot: any, index: any) => (
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-lg transition-transform duration-300"
+                    style={{
+                      transform:
+                        hoveredScreenshot === index
+                          ? "scale(1.05)"
+                          : "scale(1)",
+                    }}
+                    onMouseEnter={() => setHoveredScreenshot(index)}
+                    onMouseLeave={() => setHoveredScreenshot(null)}
+                  >
+                    <Image
+                      src={screenshot.path_thumbnail}
+                      alt={`Screenshot ${index + 1}`}
+                      width={300}
+                      height={169}
+                      className="rounded-lg w-full"
+                    />
+                  </div>
+                ))}
             </div>
           </CardContent>
         </Card>
