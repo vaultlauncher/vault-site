@@ -5,6 +5,8 @@ import Features from "@/components/features";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import Sources from "@/components/sources";
+import FAQ from "@/components/faq";
 
 export default function Home() {
   return (
@@ -39,7 +41,7 @@ export default function Home() {
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         Vault Launcher is a modern, open-source game launcher designed to allow
-        you to Download and Play your Favorite Steam games.
+        you to Download and Play games from sources like SteamRIP, and FitGirl.
       </motion.p>
       <motion.div
         className="flex justify-center flex-col items-center mt-6"
@@ -112,7 +114,7 @@ export default function Home() {
         </motion.p>
       </motion.div>
       <motion.div
-        className="mt-8 md:mt-12 flex justify-center"
+        className="mt-8 md:mt-12 flex justify-center "
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -122,10 +124,12 @@ export default function Home() {
           width={1350}
           height={740}
           alt="Vault Launcher Screenshot"
-          className=" shadow-lg w-full max-w-[800px]  overflow-hidden"
+          className=" shadow-lg w-full max-w-[800px]  overflow-hidden dark:rounded-none rounded-[5px]"
         />
       </motion.div>
       <Features />
+      <Sources />
+      <FAQ />
     </div>
   );
 }
