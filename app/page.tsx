@@ -7,6 +7,8 @@ import { Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import Sources from "@/components/sources";
 import FAQ from "@/components/faq";
+import OSDownloadButton from "@/components/download-button";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -70,15 +72,7 @@ export default function Home() {
             }}
             transition={{ duration: 0.5 }}
           >
-            <Button size="lg">
-              <svg viewBox="0 0 128 128">
-                <path
-                  fill="currentColor"
-                  d="M67.328 67.331h60.669V128H67.328zm-67.325 0h60.669V128H.003zM67.328 0h60.669v60.669H67.328zM.003 0h60.669v60.669H.003z"
-                ></path>
-              </svg>
-              Download For Windows
-            </Button>
+            <OSDownloadButton />
           </motion.div>
           <motion.div
             variants={{
@@ -104,14 +98,14 @@ export default function Home() {
             </Button>
           </motion.div>
         </motion.div>
-        <motion.p
+        {/* <motion.p
           className="text-muted-foreground text-xs mt-2 font-semibold"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.6 }}
         >
           Linux support planned
-        </motion.p>
+        </motion.p> */}
       </motion.div>
       <motion.div
         className="mt-8 md:mt-12 flex justify-center "
@@ -119,7 +113,7 @@ export default function Home() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <img
+        <Image
           src="/vaultscreenshot.png"
           width={1350}
           height={740}
