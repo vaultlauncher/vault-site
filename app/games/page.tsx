@@ -30,7 +30,14 @@ async function getHotGames(): Promise<any[]> {
 }
 
 export default async function GamesPage() {
-  const games = await getHotGames();
+  let games: any[] = [];
+  let apiError = false;
+
+  try {
+    games = await getHotGames();
+  } catch {
+    apiError = true;
+  }
 
   return (
     <div className="min-h-screen px-4 py-12">
@@ -51,11 +58,39 @@ export default async function GamesPage() {
           <Search />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {games.map((game, index) => (
-            <GameCard key={game.appid} game={game} index={index} />
-          ))}
-        </div>
+        {apiError ? (
+          <div className="flex flex-col items-center justify-center py-20 space-y-6">
+            <svg
+              className="w-16 h-16 text-muted-foreground"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h2 className="text-2xl font-semibold">
+              Oops, something went wrong
+            </h2>
+            <p
+              className="text-muted-foreground text-center"
+              style={{ maxWidth: "30rem" }}
+            >
+              Our API seems to be offline. Please try again later.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {games.map((game, index) => (
+              <GameCard key={game.appid} game={game} index={index} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -27,12 +27,14 @@ export default function Search() {
   const [results, setResults] = useState<Game[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [searchError, setSearchError] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const handleSearch = async () => {
     if (query.length < 3) return;
     setLoading(true);
     setHasSearched(true);
+    setSearchError(false);
     try {
       const apiUrl =
         process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
@@ -42,9 +44,11 @@ export default function Search() {
       if (res.ok) {
         const data: SearchResponse = await res.json();
         setResults(data.games);
+      } else {
+        setSearchError(true);
       }
-    } catch (error) {
-      console.error("Search failed:", error);
+    } catch {
+      setSearchError(true);
     }
     setLoading(false);
   };
@@ -87,10 +91,18 @@ export default function Search() {
         </ButtonGroup>
       </div>
 
-      {hasSearched && results.length === 0 && !loading && (
+      {hasSearched && results.length === 0 && !loading && !searchError && (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
             No games found for &quot;{query}&quot;. Try a different search term.
+          </p>
+        </div>
+      )}
+
+      {searchError && (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">
+            Oops, something went wrong. Our API seems to be offline.
           </p>
         </div>
       )}
