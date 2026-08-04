@@ -1,36 +1,29 @@
-import Search from "./search";
-import { GameCard } from "./game-card";
-import { Metadata } from "next/types";
-
-interface DetailedGame {
-  steam_appid?: number;
-  appid?: number;
-  name: string;
-  [key: string]: unknown;
-}
+import type { Metadata } from "next/types";
+import { Flame } from "lucide-react";
+import { GamesBrowser } from "./games-browser";
+import { normalizeGames } from "@/lib/games";
 
 export const metadata: Metadata = {
   title: "Browse Games",
+  description:
+    "Discover the hottest games on Vault Launcher right now. Search thousands of titles and find your next favorite.",
 };
 
-async function getHotGames(): Promise<any[]> {
-  const apiUrl =
-    process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
-  const res = await fetch(`${apiUrl}/games/hot`, {
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
+
+async function getHotGames(): Promise<unknown[]> {
+  const res = await fetch(`${API_URL}/games/hot`, {
     next: { revalidate: 18000 },
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch hot games");
+    throw new Error(`Failed to fetch hot games (${res.status})`);
   }
-  const detailedGames: DetailedGame[] = await res.json();
-  return detailedGames.map((game) => ({
-    ...game,
-    appid: game.steam_appid || game.appid || 0,
-  }));
+  return normalizeGames(await res.json());
 }
 
 export default async function GamesPage() {
-  let games: any[] = [];
+  let games: unknown[] = [];
   let apiError = false;
 
   try {
@@ -41,56 +34,22 @@ export default async function GamesPage() {
 
   return (
     <div className="min-h-screen px-4 py-12">
-      <div className="mx-auto" style={{ maxWidth: "80rem" }}>
-        <div className="text-center mb-12 space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Hot Games</h1>
-
-          <p
-            className="text-muted-foreground text-lg mx-auto"
-            style={{ maxWidth: "42rem" }}
-          >
-            Discover the most popular games right now. Find your next gaming
-            adventure.
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-10 space-y-4 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+            <Flame className="h-4 w-4" />
+            Trending on Vault
+          </div>
+          <h1 className="text-4xl font-bold md:text-6xl">
+            Browse <span className="text-primary">Games</span>
+          </h1>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Discover what&apos;s hot right now. Search thousands of titles and
+            find your next favorite game.
           </p>
-        </div>
+        </header>
 
-        <div className="mb-12">
-          <Search />
-        </div>
-
-        {apiError ? (
-          <div className="flex flex-col items-center justify-center py-20 space-y-6">
-            <svg
-              className="w-16 h-16 text-muted-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <h2 className="text-2xl font-semibold">
-              Oops, something went wrong
-            </h2>
-            <p
-              className="text-muted-foreground text-center"
-              style={{ maxWidth: "30rem" }}
-            >
-              Our API seems to be offline. Please try again later.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {games.map((game, index) => (
-              <GameCard key={game.appid} game={game} index={index} />
-            ))}
-          </div>
-        )}
+        <GamesBrowser initialGames={games} initialError={apiError} />
       </div>
     </div>
   );
