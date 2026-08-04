@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 
 import { Folder, Paperclip, Gamepad, Github } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import UserMenu from "./user-menu";
 
 export default function Navbar() {
   return (
@@ -58,6 +59,12 @@ export default function Navbar() {
           <Button size="sm" asChild>
             <Link href="/">Download</Link>
           </Button>
+          <UserMenu />
+          <ModeToggle />
+        </div>
+
+        <div className="md:hidden flex items-center gap-2">
+          <UserMenu />
           <ModeToggle />
         </div>
       </div>
