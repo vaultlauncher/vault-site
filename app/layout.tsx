@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import FloatingIconsBackground from "@/components/background";
 
 export const metadata: Metadata = {
   title: {
@@ -88,6 +89,9 @@ export default function RootLayout({
           <link rel="manifest" href="/site.webmanifest"></link>
         </head>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="fixed inset-0 -z-10">
+            <FloatingIconsBackground />
+          </div>
           <Navbar />
           {children}
           <Footer />
