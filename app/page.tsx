@@ -9,6 +9,7 @@ import Sources from "@/components/sources";
 import FAQ from "@/components/faq";
 import OSDownloadButton from "@/components/download-button";
 import Image from "next/image";
+import { Ads } from "@/components/ads";
 
 export default function Home() {
   return (
@@ -123,7 +124,9 @@ export default function Home() {
       </motion.div>
       <Features />
       <Sources />
+      <Ads variant="rectangle" className="mt-12" />
       <FAQ />
+      <Ads variant="banner" className="mt-12" />
     </div>
   );
 }

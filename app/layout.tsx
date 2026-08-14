@@ -16,6 +16,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import FloatingIconsBackground from "@/components/background";
+import { Ads } from "@/components/ads";
 
 export const metadata: Metadata = {
   title: {
@@ -93,6 +94,7 @@ export default function RootLayout({
             <FloatingIconsBackground />
           </div>
           <Navbar />
+          <Ads variant="leaderboard" className="mt-4" />
           {children}
           <Footer />
         </ThemeProvider>

@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { getAppId } from "@/lib/games";
 import { GameCard, GameCardSkeleton } from "./game-card";
 import { FeaturedHero } from "./hero";
+import { Ads } from "@/components/ads";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://vaultapi.parcoil.com";
@@ -154,6 +155,8 @@ export function GamesBrowser({
               </div>
             </section>
           )}
+
+          <Ads variant="native" className="mt-12" />
         </>
       )}
     </div>
