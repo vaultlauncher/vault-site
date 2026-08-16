@@ -16,7 +16,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import FloatingIconsBackground from "@/components/background";
-import { Ads } from "@/components/ads";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Vault Launcher",
   },
   description:
-    "The Ultimate Game Launcher. Discover, organize, and launch your games with speed and style.",
+    "Vault is a fast, modern, open-source game launcher for Windows. Coming soon.",
   applicationName: "Vault Launcher",
   authors: [{ name: "Parcoil", url: "https://vault.parcoil.com" }],
   keywords: [
@@ -94,8 +94,7 @@ export default function RootLayout({
             <FloatingIconsBackground />
           </div>
           <Navbar />
-          <Ads variant="leaderboard" className="mt-4" />
-          {children}
+          <TooltipProvider> {children}</TooltipProvider>
           <Footer />
         </ThemeProvider>
       </body>

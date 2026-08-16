@@ -1,13 +1,20 @@
+"use client";
+
 import Logo from "./logo";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-import { Folder, Paperclip, Gamepad, Github } from "lucide-react";
+import { Folder, Github } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import { motion } from "motion/react";
 
 export default function Navbar() {
   return (
-    <div className="px-6 mx-auto max-w-7xl">
+    <motion.div
+      className="px-6 mx-auto max-w-7xl"
+      initial={{ opacity: 0, y: -48 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", duration: 0.9, bounce: 0.2 }}
+    >
       <div className="bg-card/80 backdrop-blur-sm p-4 rounded-xl flex flex-row items-center justify-between m-4 border shadow-sm w-full">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex gap-3  items-center">
@@ -30,22 +37,6 @@ export default function Navbar() {
             </div>
             <div>
               <Link
-                href="/games"
-                className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md hover:bg-accent flex flex-row items-center gap-2"
-              >
-                <Gamepad className="w-4 h-4" /> Browse Games
-              </Link>
-            </div>
-            <div>
-              <Link
-                href="/"
-                className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md hover:bg-accent flex flex-row items-center gap-2"
-              >
-                <Paperclip className="w-4 h-4" /> Docs
-              </Link>
-            </div>
-            <div>
-              <Link
                 href="https://github.com/vaultlauncher"
                 className="px-4 py-2 text-sm font-medium transition-colors hover:text-primary rounded-md hover:bg-accent flex flex-row items-center gap-2"
               >
@@ -55,12 +46,12 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Button size="sm" asChild>
-            <Link href="/">Download</Link>
-          </Button>
+          {/* <Button size="sm" asChild>
+            <Link href="#waitlist">Get notified</Link>
+          </Button> */}
           <ModeToggle />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -13,28 +13,16 @@ export default function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <Link
-              href="/"
+              href="/privacy"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Features
-            </Link>
-            <Link
-              href="/"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Docs
+              Privacy
             </Link>
             <Link
               href="/dmca"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               DMCA
-            </Link>
-            <Link
-              href="/privacy"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              Privacy
             </Link>
             <Button variant="ghost" size="sm" asChild>
               <Link href="/">

@@ -64,7 +64,7 @@ function Sources() {
                 <div className="flex items-start gap-2">
                   <Zap className="w-5 h-5 mt-0.5 shrink-0 text-primary" />
                   <p className="text-sm text-muted-foreground">
-                    Regular updates and extensive game library (2000+ in Vault)
+                    Regular updates and extensive game library
                   </p>
                 </div>
               </div>
@@ -101,7 +101,7 @@ function Sources() {
                   </Badge>
                 </div>
                 <CardDescription className="text-base">
-                  High-quality repacks with optimized compression technology
+                  High-quality Compressed Repacks
                 </CardDescription>
               </div>
             </CardHeader>
@@ -111,13 +111,13 @@ function Sources() {
                 <div className="flex items-start gap-2">
                   <Zap className="w-5 h-5 mt-0.5 shrink-0 text-primary" />
                   <p className="text-sm text-muted-foreground">
-                    Access to 5,000+ compressed games saving storage space
+                    Easy One-click downloads in Vault Launcher
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <Zap className="w-5 h-5 mt-0.5 shrink-0 text-primary" />
                   <p className="text-sm text-muted-foreground">
-                    Easy One-click downloads in Vault Launcher
+                    Downloads With Torrents
                   </p>
                 </div>
               </div>
