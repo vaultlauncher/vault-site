@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import {
   Gamepad2,
@@ -39,7 +38,7 @@ const ICON_POOL = [
   Zap,
 ];
 
-function rand(min: number, max: number) {
+function rand(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
@@ -79,7 +78,7 @@ function generateIcons(count: number): IconSpec[] {
       top: rand(2, 92),
       left: rand(2, 92),
       size,
-      opacity: rand(0.06, 0.22) * depth + 0.04,
+      opacity: 0.19,
       floatDuration: rand(14, 34),
       floatDelay: rand(-20, 0),
       spinDuration: rand(6, 20),
@@ -99,7 +98,10 @@ function generateIcons(count: number): IconSpec[] {
 export default function FloatingIconsBackground({
   count = 24,
   className = "",
-}) {
+}: {
+  count?: number;
+  className?: string;
+}): React.JSX.Element {
   const [icons] = useState(() => generateIcons(count));
 
   return (
@@ -164,20 +166,20 @@ export default function FloatingIconsBackground({
           <div
             key={id}
             className={`absolute ${floats ? "icon-float" : ""}`}
-              style={
-                {
-                  top: `${top}%`,
-                  left: `${left}%`,
-                  animationDuration: `${floatDuration}s`,
-                  animationDelay: `${floatDelay}s`,
-                  "--x1": `${x1}px`,
-                  "--y1": `${y1}px`,
-                  "--x2": `${x2}px`,
-                  "--y2": `${y2}px`,
-                  "--x3": `${x3}px`,
-                  "--y3": `${y3}px`,
-                } as React.CSSProperties
-              }
+            style={
+              {
+                top: `${top}%`,
+                left: `${left}%`,
+                animationDuration: `${floatDuration}s`,
+                animationDelay: `${floatDelay}s`,
+                "--x1": `${x1}px`,
+                "--y1": `${y1}px`,
+                "--x2": `${x2}px`,
+                "--y2": `${y2}px`,
+                "--x3": `${x3}px`,
+                "--y3": `${y3}px`,
+              } as React.CSSProperties
+            }
           >
             <Icon
               className={spins ? "icon-spin" : ""}
@@ -197,14 +199,3 @@ export default function FloatingIconsBackground({
     </div>
   );
 }
-
-/*
-Usage:
-  <FloatingIconsBackground />                 // default: 24 icons
-  <FloatingIconsBackground count={40} />       // denser field
-  <FloatingIconsBackground className="rounded-xl" />
-
-Drop real foreground content (a hero, a card, a login form) as a sibling
-with position: relative + a higher z-index, or nest it inside this
-component and give it `relative z-10`.
-*/
